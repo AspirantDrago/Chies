@@ -44,6 +44,8 @@ class Board:
     move <row> <col> <row1> <col1>      -- ход из клетки (row, col)
                                            в клетку (row1, col1)'''
 
+    def move_piece(self, row, col, row1, col1):
+        return True
 
 
 
@@ -52,6 +54,20 @@ def main():
     while True:
         print(board)
         print(board.help())
+        print(board.current_player_string)
+        command = input().strip().lower()
+        if command == 'exit':
+            break
+        try:
+            _, *coords = command.split()
+            row, col, row1, col1 = map(int, coords)
+        except Exception as e:
+            print('Ввод некорректны! Попробуйте другой ход!', e)
+        else:
+            if board.move_piece(row, col, row1, col1):
+                print('Ход успешен')
+            else:
+                print('Координаты некорректны! Попробуйте другой ход!')
 
 
 
